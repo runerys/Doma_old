@@ -2,10 +2,16 @@
   include_once(dirname(__FILE__) ."/include/main.php");
   
   class RSSController
-  {
+  {   
     public function Execute()
     {
       $viewData = array();  
+      $dateformat = "r";
+     
+      if(isset($_GET["dateformat"]))
+      {
+        $dateformat = $_GET["dateformat"];
+      }
 
       // check if user is not specified or hidden
       if(!getCurrentUser())
@@ -18,7 +24,7 @@
         $categories = DataAccess::GetCategoriesByUserID();
         $users = DataAccess::GetAllUsers(true);
         $viewData["Title"] = _SITE_TITLE;
-        $viewData["LastCreatedTime"] = date("r", DataAccess::GetLastCreatedTime());
+        $viewData["LastCreatedTime"] = date($dateformat, DataAccess::GetLastCreatedTime());
         $viewData["Description"] = _SITE_DESCRIPTION;
         $viewData["WebsiteUrl"] = Helper::GlobalPath("index.php");
       }
@@ -31,7 +37,7 @@
         $maps = DataAccess::GetMaps(getCurrentUser()->ID);
         $categories = DataAccess::GetCategoriesByUserID(getCurrentUser()->ID);
         $viewData["Title"] = __("PAGE_TITLE");
-        $viewData["LastCreatedTime"] = date("r", DataAccess::GetLastCreatedTime(getCurrentUser()->ID));
+        $viewData["LastCreatedTime"] = date($dateformat, DataAccess::GetLastCreatedTime(getCurrentUser()->ID));
         $viewData["Description"] = __("RSS_DESCRIPTION");
         $viewData["WebsiteUrl"] = Helper::GlobalPath("index.php?". Helper::CreateQuerystring(getCurrentUser()));
       }
@@ -39,7 +45,10 @@
       $viewData["Items"] = array();
 
       foreach($maps as $map)
-      {
+      {             
+        if(ShouldSkip($map))
+          continue;
+        
         $item = array();
         $user = $users[$map->UserID];
         $item["Title"] = hsc(Helper::DateToLongString(Helper::StringToTime($map->Date, true)) .": ". $map->Name);
@@ -61,11 +70,36 @@
           hsc(join(", ", $atoms)) .
           hsc('<br />'). 
           join(", ", $atoms2);
-        $item["PubDate"] = hsc(date("r", Helper::StringToTime($map->CreatedTime, true)));      
+          
+        if($_GET["nameonly"] === '1')
+           $item["Description"] = hsc($user->FirstName ." ". $user->LastName);
+        
+        $item["PubDate"] = hsc(date($dateformat, Helper::StringToTime($map->CreatedTime, true)));      
         $viewData["Items"][] = $item;      
       }
       
       return $viewData;
     }
+    
+    private function ShouldSkip($map)
+    {
+      if(RSS_SKIP_MAPS_WITH_DICIPLINE_CONTAINING === '')
+        return false;
+        
+      $dicipline = $map->Dicipline;
+      
+      $stopWords = explode(';', RSS_SKIP_MAPS_WITH_DICIPLINE_CONTAINING);
+        
+      foreach($stopWords as $stopWord)
+      {
+        if (stripos($dicipline, $stopWord) !== false)
+        {
+          return true;
+        }
+      }
+      
+      return false;
+    }
+    
   }
 ?>

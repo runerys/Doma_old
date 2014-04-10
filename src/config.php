@@ -154,4 +154,8 @@
   define('SMTP_PASSWORD', getenv('SMTP_PASSWORD'));
   // Set SMTP Ecryption valid values={'tls', ssl, ''} (empty = not set)
   define('SMTP_ENCRYPTION', getenv('SMTP_ENCRYPTION'));  
+  
+    // To avoid exporting certain maps, users can tag it with using certain words in the dicipline field.
+  // Value is case-insensitive and supports multiple values separated with ';' ex: 'nowoo;internal'
+  define('RSS_SKIP_MAPS_WITH_DICIPLINE_CONTAINING', getenv('RSS_SKIP_MAPS_WITH_DICIPLINE_CONTAINING'));
 ?>
