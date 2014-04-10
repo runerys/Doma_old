@@ -139,4 +139,7 @@
   define('IMAGEFILE_SIZE_SHOW', getenv('IMAGEFILE_SIZE_SHOW'));
   // Image File Size: Abort upload of all images larger than this size. In Megabytes. 0=disabled
   define('IMAGEFILE_SIZE_LIMIT_MB', getenv('IMAGEFILE_SIZE_LIMIT_MB')); 
+  
+  // Override the standard greeting to enable external memberlogin and cross-site request.
+  define('PUBLIC_CREATE_USER_INFO_OVERRIDE', getenv(' '));
 ?>
