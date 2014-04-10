@@ -136,7 +136,7 @@
   
   
   // Image File Size: Show file size on user index and on map (1 = yes, 0 = no)
-  define('IMAGEFILE_SIZE_SHOW', '1');
+  define('IMAGEFILE_SIZE_SHOW', getenv('IMAGEFILE_SIZE_SHOW'));
   // Image File Size: Abort upload of all images larger than this size. In Megabytes. 0=disabled
-  define('IMAGEFILE_SIZE_LIMIT_MB', '4'); 
+  define('IMAGEFILE_SIZE_LIMIT_MB', getenv('IMAGEFILE_SIZE_LIMIT_MB')); 
 ?>
