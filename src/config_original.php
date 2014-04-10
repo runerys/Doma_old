@@ -140,18 +140,16 @@
   define('IMAGEFILE_SIZE_LIMIT_MB', '0');
   
   // Override the standard greeting to enable external memberlogin and cross-site request.
-  define('PUBLIC_CREATE_USER_INFO_OVERRIDE, '');
+  define('PUBLIC_CREATE_USER_INFO_OVERRIDE', '');
   
-   // SMTP Mail Settings
+  // SMTP Mail Settings
   // Enable or disable SMTP instead of phpmail (1=use smtp, 0=use default php mail)
   define('SMTP_ENABLED', '0');
   // Smtp server host name with port. Separate multiple with ';': example: server1:446;server2:446
   define('SMTP_HOST', '');  
-  // Smtp server use authentication. (0 = disabled, 1 = enabled)
-  define('SMTP_AUTH_ENABLED', '1');
   // Smtp server login username
   define('SMTP_USERNAME', '');
-  // Smtp server login password
+  // Smtp server login password (for gmail, use application password if using 2-factor-auth)
   define('SMTP_PASSWORD', '');
   // Set SMTP Ecryption valid values={tls, ssl, ''} (empty = not set)
   define('SMTP_ENCRYPTION', '');  

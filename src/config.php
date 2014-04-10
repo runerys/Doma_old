@@ -139,6 +139,7 @@
   define('IMAGEFILE_SIZE_SHOW', getenv('IMAGEFILE_SIZE_SHOW'));
   // Image File Size: Abort upload of all images larger than this size. In Megabytes. 0=disabled
   define('IMAGEFILE_SIZE_LIMIT_MB', getenv('IMAGEFILE_SIZE_LIMIT_MB'));   
+  
   // Override the standard greeting to enable external memberlogin and cross-site request.
   define('PUBLIC_CREATE_USER_INFO_OVERRIDE', getenv('PUBLIC_CREATE_USER_INFO_OVERRIDE'));
   
@@ -147,8 +148,6 @@
   define('SMTP_ENABLED', getenv('SMTP_ENABLED'));
   // Smtp server host name
   define('SMTP_HOST', getenv('SMTP_HOST'));  
-  // Smtp server use authentication. (0 = disabled, 1 = enabled)
-  define('SMTP_AUTH_ENABLED', getenv('SMTP_AUTH_ENABLED'));
   // Smtp server login username
   define('SMTP_USERNAME', getenv('SMTP_USERNAME'));
   // Smtp server login password

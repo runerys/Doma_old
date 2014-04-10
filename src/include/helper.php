@@ -883,12 +883,9 @@
       $mail->isSMTP();                        // Set mailer to use SMTP
       $mail->Host = SMTP_HOST;                // Specify main and backup server
       
-      if(SMTP_AUTH_ENABLED)
-      {
-        $mail->SMTPAuth = true;                 // Enable SMTP authentication
-        $mail->Username = SMTP_USERNAME;        // SMTP username
-        $mail->Password = SMTP_PASSWORD;        // SMTP password
-      }
+      $mail->SMTPAuth = true;                 // Enable SMTP authentication
+      $mail->Username = SMTP_USERNAME;        // SMTP username
+      $mail->Password = SMTP_PASSWORD;        // SMTP password
       
       if(SMTP_ENCRYPTION != '')
       {
