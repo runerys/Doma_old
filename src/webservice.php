@@ -481,7 +481,7 @@
       $url = Helper::GlobalPath("show_map.php?user=". urlencode($user->Username) ."&map=". $map->ID);
       
       // If image file limit is enabled
-      if(IMAGEFILE_SIZE_LIMIT_MB > 0)
+      if(IMAGEFILE_SIZE_LIMIT_MB > 0 || IMAGEFILE_SIZE_SHOW)
       {
         // Inform user of file size through url (only available backchannel to QuickRoute on success)
         $url .= "&_____________MEGABYTES=$size";
