@@ -141,5 +141,5 @@
   define('IMAGEFILE_SIZE_LIMIT_MB', getenv('IMAGEFILE_SIZE_LIMIT_MB')); 
   
   // Override the standard greeting to enable external memberlogin and cross-site request.
-  define('PUBLIC_CREATE_USER_INFO_OVERRIDE', getenv(' '));
+  define('PUBLIC_CREATE_USER_INFO_OVERRIDE', getenv('PUBLIC_CREATE_USER_INFO_OVERRIDE'));
 ?>
