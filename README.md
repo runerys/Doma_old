@@ -9,6 +9,9 @@ Deployed to Microsoft Azure as a Web Site at http://domarunerys.azurewebsites.ne
 
 Using automatic Git deployment and configuration values from application settings in the portal.
 
-# Extra features
+## Implemented features
 - Show image file size
 - Send email via SMTP
+
+## Planned features
+- Allow private user interaction. Today, login is blocked.
