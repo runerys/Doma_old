@@ -50,7 +50,7 @@
     <?php }?>
   <?php }?>
   
-
+  <script src="js/filesize.js?v=<?php print DOMA_VERSION; ?>" type="text/javascript"></script>
 </head>
 <body id="showMapBody">
 <center>
