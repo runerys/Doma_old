@@ -15,6 +15,7 @@ Using automatic Git deployment and configuration values from application setting
 - Send email via SMTP (our webserver was blocked)
 - RSS: Filter out maps by tagging dicipline field
 - RSS: Override filter with secret parameter value
+- Override public user create info message to enable self-service process
 
 ## Planned features
 - Allow private user interaction. Today, login is blocked.
