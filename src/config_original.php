@@ -137,7 +137,7 @@
    // SMTP Mail Settings
   // Enable or disable SMTP instead of phpmail (1=use smtp, 0=use default php mail)
   define('SMTP_ENABLED', '0');
-  // Smtp server host name
+  // Smtp server host name with port. Separate multiple with ';': example: server1:446;server2:446
   define('SMTP_HOST', '');  
   // Smtp server use authentication. (0 = disabled, 1 = enabled)
   define('SMTP_AUTH_ENABLED', '1');

@@ -869,8 +869,10 @@
     }
     
     private static function SendEmailWithSmtp($fromName, $toEmail, $subject, $body)
-    {           
+    {                  
       if(ADMIN_EMAIL == "email@yourdomain.com") return false; // the address is the default one, don't send          
+           
+      require_once(dirname(__FILE__) .'/class-phpmailer.php');
       
       $mail = new PHPMailer;
       $mail->isSMTP();                        // Set mailer to use SMTP
@@ -885,7 +887,7 @@
       
       if(SMTP_ENCRYPTION != '')
       {
-        $mail->SMTPSecure = SMTP_ENCRYPTION;  // Enable encryption, 'tsl' and 'ssl' accepted
+        $mail->SMTPSecure = SMTP_ENCRYPTION;  // Enable encryption, 'tls' and 'ssl' accepted
       }
       
       $mail->From = ADMIN_EMAIL;
@@ -896,9 +898,8 @@
       $mail->Subject = utf8_decode($subject);
       $mail->Body    = utf8_decode($body);
 
-      $result = @$mail->send();      
-      return $result;     
-    }    
+      return @$mail->Send();     
+    } 
   }
 
 ?>
