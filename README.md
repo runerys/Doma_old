@@ -11,7 +11,10 @@ Using automatic Git deployment and configuration values from application setting
 
 ## Implemented features
 - Show image file size
-- Send email via SMTP
+- Abort image upload when exeeding file size limit
+- Send email via SMTP (our webserver was blocked)
+- RSS: Filter out maps by tagging dicipline field
+- RSS: Override filter with secret parameter value
 
 ## Planned features
 - Allow private user interaction. Today, login is blocked.
