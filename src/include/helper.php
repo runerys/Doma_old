@@ -518,6 +518,11 @@
 
     public static function SendEmail($fromName, $toEmail, $subject, $body)
     {
+      if(SMTP_ENABLED)
+      {
+        return Helper::SendEmailWithSmtp($fromName, $toEmail, $subject, $body);
+      }
+       
       if(ADMIN_EMAIL == "email@yourdomain.com") return false; // the address is the default one, don't send
       $header = "From: ". utf8_decode($fromName) . " <" . ADMIN_EMAIL . ">\r\n";
       ini_set('sendmail_from', ADMIN_EMAIL);
@@ -867,6 +872,39 @@
     {
       return round((filesize($filename) / 1024 / 1024), 2);
     }
+    
+    private static function SendEmailWithSmtp($fromName, $toEmail, $subject, $body)
+    {                  
+      if(ADMIN_EMAIL == "email@yourdomain.com") return false; // the address is the default one, don't send          
+           
+      require_once(dirname(__FILE__) .'/class-phpmailer.php');
+      
+      $mail = new PHPMailer;
+      $mail->isSMTP();                        // Set mailer to use SMTP
+      $mail->Host = SMTP_HOST;                // Specify main and backup server
+      
+      if(SMTP_AUTH_ENABLED)
+      {
+        $mail->SMTPAuth = true;                 // Enable SMTP authentication
+        $mail->Username = SMTP_USERNAME;        // SMTP username
+        $mail->Password = SMTP_PASSWORD;        // SMTP password
+      }
+      
+      if(SMTP_ENCRYPTION != '')
+      {
+        $mail->SMTPSecure = SMTP_ENCRYPTION;  // Enable encryption, 'tls' and 'ssl' accepted
+      }
+      
+      $mail->From = ADMIN_EMAIL;
+      $mail->FromName = utf8_decode($fromName);
+      $mail->addAddress($toEmail);  // Add a recipient
+      $mail->addReplyTo(ADMIN_EMAIL);
+
+      $mail->Subject = utf8_decode($subject);
+      $mail->Body    = utf8_decode($body);
+
+      return @$mail->Send();     
+    } 
   }
 
 ?>
