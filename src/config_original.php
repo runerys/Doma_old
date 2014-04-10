@@ -133,4 +133,18 @@
   // Worldofo.com api key - please ask Jan Kocbach jan.kocbach@gmail.com to get it 
   // By this procedure you also recheck that your maps are collected
   define('RERUN_APIKEY','xxxxxx');
+  
+   // SMTP Mail Settings
+  // Enable or disable SMTP instead of phpmail (1=use smtp, 0=use default php mail)
+  define('SMTP_ENABLED', '0');
+  // Smtp server host name
+  define('SMTP_HOST', '');  
+  // Smtp server use authentication. (0 = disabled, 1 = enabled)
+  define('SMTP_AUTH_ENABLED', '1');
+  // Smtp server login username
+  define('SMTP_USERNAME', '');
+  // Smtp server login password
+  define('SMTP_PASSWORD', '');
+  // Set SMTP Ecryption valid values={tls, ssl, ''} (empty = not set)
+  define('SMTP_ENCRYPTION', '');  
 ?>
