@@ -457,14 +457,35 @@
       
       $thumbnailCreatedSuccessfully = false;
       $error = null;
+      
+      // Calculate file size before files are unlinked below.
+      $size = Helper::GetFileSize($mapImageFileName);
+      
       DataAccess::SaveMapAndThumbnailImage($map, $mapImageFileName, $blankMapImageFileName, $thumbnailImageFileName, $error, $thumbnailCreatedSuccessfully);
+      
       if($mapImageFileName) unlink($mapImageFileName);
       if($blankMapImageFileName) unlink($blankMapImageFileName);
       if($thumbnailImageFileName) unlink($thumbnailImageFileName);
       if(!$mapInfo["ID"]) Helper::LogUsage("addMapWS", "user=". urlencode($user->Username) ."&map=". $map->ID);
-      $errorMessage = mysql_error();
+      
+      if($error)
+      {  
+        $errorMessage = $error;
+      }
+      else
+      {
+        $errorMessage = mysql_error();
+      }
+      
       $success = ($errorMessage == "");
       $url = Helper::GlobalPath("show_map.php?user=". urlencode($user->Username) ."&map=". $map->ID);
+      
+      // If image file limit is enabled
+      if(IMAGEFILE_SIZE_LIMIT_MB > 0)
+      {
+        // Inform user of file size through url (only available backchannel to QuickRoute on success)
+        $url .= "&_____________MEGABYTES=$size";
+      }
     }
 
     return array(

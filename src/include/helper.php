@@ -863,6 +863,10 @@
       }
     }
     
+    public static function GetFileSize($filename)
+    {
+      return round((filesize($filename) / 1024 / 1024), 2);
+    }
   }
 
 ?>

@@ -50,7 +50,9 @@
     <?php }?>
   <?php }?>
   
-  <script src="js/filesize.js?v=<?php print DOMA_VERSION; ?>" type="text/javascript"></script>
+  <?php if(IMAGEFILE_SIZE_SHOW) {?>
+    <script src="js/filesize.js?v=<?php print DOMA_VERSION; ?>" type="text/javascript"></script>
+  <?php } ?>
 </head>
 <body id="showMapBody">
 <center>

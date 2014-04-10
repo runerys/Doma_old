@@ -133,4 +133,9 @@
   // Worldofo.com api key - please ask Jan Kocbach jan.kocbach@gmail.com to get it 
   // By this procedure you also recheck that your maps are collected
   define('RERUN_APIKEY','xxxxxx');
+  
+    // Image File Size: Show file size on user index and on map (1 = yes, 0 = no)
+  define('IMAGEFILE_SIZE_SHOW', '0');
+  // Image File Size: Abort upload of all images larger than this size. In Megabytes. 0=disabled
+  define('IMAGEFILE_SIZE_LIMIT_MB', '0');
 ?>

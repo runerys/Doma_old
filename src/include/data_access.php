@@ -257,6 +257,20 @@
       $inputMapImageFileName = $mapImageFileName;
       $inputBlankMapImageFileName = $blankMapImageFileName;
       $inputThumbnailImageFileName = $thumbnailImageFileName;
+    
+      // Image File Size Limit (0 = disabled)
+      if(IMAGEFILE_SIZE_LIMIT_MB > 0)
+      {        
+        $size = Helper::GetFileSize($inputMapImageFileName);
+           
+        if($size > IMAGEFILE_SIZE_LIMIT_MB)
+        {         
+          // This is used through the webservice, hence no translation. 
+          $error = 'The uploaded file is '.$size.' MB and exceeds the limit of '.IMAGEFILE_SIZE_LIMIT_MB.' MB. Please, adjust and try again.';      
+          return;
+        }
+      }
+      
       $isNewMap = !($map->ID);
       $uploadDir = Helper::LocalPath(MAP_IMAGE_PATH ."/");
       $thumbnailCreatedSuccessfully = true;

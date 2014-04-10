@@ -30,7 +30,9 @@
   <?php } ?>
   <script src="js/index.js?v=<?php print DOMA_VERSION; ?>" type="text/javascript"></script>
   <script src="js/common.js?v=<?php print DOMA_VERSION; ?>" type="text/javascript"></script>
+  <?php if(IMAGEFILE_SIZE_SHOW) {?>
   <script src="js/filesize.js?v=<?php print DOMA_VERSION; ?>" type="text/javascript"></script>
+  <?php } ?>
 </head>
 
 <body id="indexBody">
