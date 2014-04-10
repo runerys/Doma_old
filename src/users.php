@@ -63,9 +63,9 @@
     print '</p>';
   }
   
-  if(!Helper::IsLoggedInAdmin() && PUBLIC_USER_CREATION_CODE)
+  if(!Helper::IsLoggedInAdmin() && (PUBLIC_USER_CREATION_CODE || strlen(PUBLIC_CREATE_USER_INFO_OVERRIDE) > 0))
   {
-    if(isset(PUBLIC_CREATE_USER_INFO_OVERRIDE) && strlen(PUBLIC_CREATE_USER_INFO_OVERRIDE) > 0)
+    if(strlen(PUBLIC_CREATE_USER_INFO_OVERRIDE) > 0)
     {
       print '<p>'. PUBLIC_CREATE_USER_INFO_OVERRIDE .'</p>';
     }

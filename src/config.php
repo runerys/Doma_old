@@ -69,7 +69,7 @@
 
   // Specifies the code that a person has to enter when creating a new user accounts by himself without any administrator involved.
   // Leave the code empty ('') to prevent people to create user accounts theirselves.
-  define('PUBLIC_USER_CREATION_CODE', '');
+  define('PUBLIC_USER_CREATION_CODE', getenv('PUBLIC_USER_CREATION_CODE'));
 
   // *********************************************************************************************************
   //   APPEARANCE SETTINGS
