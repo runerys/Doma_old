@@ -158,4 +158,6 @@
     // To avoid exporting certain maps, users can tag it with using certain words in the dicipline field.
   // Value is case-insensitive and supports multiple values separated with ';' ex: 'nowoo;internal'
   define('RSS_SKIP_MAPS_WITH_DICIPLINE_CONTAINING', getenv('RSS_SKIP_MAPS_WITH_DICIPLINE_CONTAINING'));
+    // Override previous setting if request contains a parameter SECRET matching a set value.
+  define('RSS_ALLOW_GET_WITH_SECRET', getenv('RSS_ALLOW_GET_WITH_SECRET'));
 ?>

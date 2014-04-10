@@ -5,7 +5,8 @@
   {   
     public function Execute()
     {
-      $viewData = array();  
+      $viewData = array();
+      
       $dateformat = "r";
      
       if(isset($_GET["dateformat"]))
@@ -46,7 +47,7 @@
 
       foreach($maps as $map)
       {             
-        if(ShouldSkip($map))
+        if($this->ShouldSkip($map))
           continue;
         
         $item = array();
@@ -83,23 +84,28 @@
     
     private function ShouldSkip($map)
     {
-      if(RSS_SKIP_MAPS_WITH_DICIPLINE_CONTAINING === '')
-        return false;
-        
-      $dicipline = $map->Dicipline;
+      if(strlen(RSS_ALLOW_GET_WITH_SECRET) > 0)
+      {
+        if(isset($_GET["SECRET"]) && $_GET["SECRET"] == RSS_ALLOW_GET_WITH_SECRET)
+          return false;
+      }
+    
+      if(strlen(RSS_SKIP_MAPS_WITH_DICIPLINE_CONTAINING) == 0)
+        return false;            
+      
+      $discipline = $map->Discipline;        
       
       $stopWords = explode(';', RSS_SKIP_MAPS_WITH_DICIPLINE_CONTAINING);
         
       foreach($stopWords as $stopWord)
       {
-        if (stripos($dicipline, $stopWord) !== false)
-        {
+        if (stripos($discipline, $stopWord) !== false)
+        {        
           return true;
         }
       }
       
       return false;
-    }
-    
+    }    
   }
 ?>
