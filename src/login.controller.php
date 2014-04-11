@@ -12,9 +12,12 @@
       // no user specified - redirect to user list page
       if(!getCurrentUser()) Helper::Redirect("users.php");
 
-      // user is hidden - redirect to user list page
-      if(!getCurrentUser()->Visible) Helper::Redirect("users.php");
-
+      if(!USER_ALLOW_HIDDEN_USAGE)
+      {
+        // user is hidden - redirect to user list page
+        if(!getCurrentUser()->Visible) Helper::Redirect("users.php");
+      }
+      
       if(isset($_POST["cancel"]))
       {
         Helper::Redirect("index.php?". Helper::CreateQuerystring(getCurrentUser()));

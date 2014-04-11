@@ -160,4 +160,7 @@
   define('RSS_SKIP_MAPS_WITH_DICIPLINE_CONTAINING', getenv('RSS_SKIP_MAPS_WITH_DICIPLINE_CONTAINING'));
     // Override previous setting if request contains a parameter SECRET matching a set value.
   define('RSS_ALLOW_GET_WITH_SECRET', getenv('RSS_ALLOW_GET_WITH_SECRET'));
+  
+  // Administrator can set user invisible. This setting allows user to still use account privately. 0=disabled, 1=enabled
+  define('USER_ALLOW_HIDDEN_USAGE', getenv('USER_ALLOW_HIDDEN_USAGE');
 ?>
