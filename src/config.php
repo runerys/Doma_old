@@ -162,5 +162,5 @@
   define('RSS_ALLOW_GET_WITH_SECRET', getenv('RSS_ALLOW_GET_WITH_SECRET'));
   
   // Administrator can set user invisible. This setting allows user to still use account privately. 0=disabled, 1=enabled
-  define('USER_ALLOW_HIDDEN_USAGE', getenv('USER_ALLOW_HIDDEN_USAGE');
+  define('USER_ALLOW_HIDDEN_USAGE', getenv('USER_ALLOW_HIDDEN_USAGE'));
 ?>

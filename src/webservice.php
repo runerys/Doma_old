@@ -353,7 +353,7 @@
     {
       $maps = array();
 
-      $dbMaps = DataAccess::GetAllMaps($user->ID);
+      $dbMaps = DataAccess::GetAllMaps($user->ID, $user->ID);
 
       foreach($dbMaps as $m)
       {

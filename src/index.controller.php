@@ -15,9 +15,11 @@
         Helper::SetUser(DataAccess::GetUserByID($singleUserID));
       }
       
-      // user is hidden - redirect to user list page
-      if(!getCurrentUser()->Visible) Helper::Redirect("users.php");
-      
+      if(!USER_ALLOW_HIDDEN_USAGE)
+      {
+        // user is hidden - redirect to user list page
+        if(!getCurrentUser()->Visible) Helper::Redirect("users.php");
+      }      
       $searchCriteria = Session::GetSearchCriteria(getCurrentUser()->ID);
       
       if(!isset($searchCriteria))

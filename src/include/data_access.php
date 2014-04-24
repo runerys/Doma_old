@@ -8,7 +8,10 @@
       $userID = mysql_real_escape_string($userID);
       $requestingUserID = mysql_real_escape_string($requestingUserID);
       $now = mysql_real_escape_string(gmdate("Y-m-d H:i:s"));
-      $where[] = "U.Visible=1";
+      if(!(USER_ALLOW_HIDDEN_USAGE && $userID == $requestingUserID && $requestingUserID != 0))
+      {
+        $where[] = "U.Visible=1";
+      }
       if($userID) $where[] = "M.UserID='$userID'";
       $where[] = "(M.ProtectedUntil IS NULL OR M.ProtectedUntil<='$now' OR U.ID='$requestingUserID')";
 
@@ -51,7 +54,11 @@
         default: $ob = "M.Date DESC"; break;
       }
 
-      $where[] = "U.Visible=1";
+      if(!(USER_ALLOW_HIDDEN_USAGE && $userID == $requestingUserID && $requestingUserID != 0))
+      {
+        $where[] = "U.Visible=1";
+      }
+      
       if($userID) $where[] = "M.UserID='$userID'";
       if($startDate) $where[] = "DATE(M.Date)>='$startDateString'";
       if($endDate) $where[] = "DATE(M.Date)<='$endDateString'";
@@ -491,7 +498,13 @@
     {
       $username = mysql_real_escape_string($username);
       $password = mysql_real_escape_string(md5($password));
-      $sql = "SELECT * FROM `". DB_USER_TABLE ."` WHERE Username='$username' AND Password='$password' AND Visible=1";
+      $sql = "SELECT * FROM `". DB_USER_TABLE ."` WHERE Username='$username' AND Password='$password'";
+      
+      if(!USER_ALLOW_HIDDEN_USAGE)
+      {
+        $sql .= " AND Visible=1";
+      }
+      
       $rs = self::Query($sql);
 
       if($r = mysql_fetch_assoc($rs))
