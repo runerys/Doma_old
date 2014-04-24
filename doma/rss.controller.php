@@ -84,12 +84,14 @@
     
     private function ShouldSkip($map)
     {
+      // Allow all fetching if secret value is presented
       if(strlen(RSS_ALLOW_GET_WITH_SECRET) > 0)
       {
         if(isset($_GET["SECRET"]) && $_GET["SECRET"] == RSS_ALLOW_GET_WITH_SECRET)
           return false;
       }
     
+      // Allow all fetching unless dicipline filter is set
       if(strlen(RSS_SKIP_MAPS_WITH_DICIPLINE_CONTAINING) == 0)
         return false;            
       

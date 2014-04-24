@@ -136,7 +136,8 @@
   
     // Image File Size: Show file size on user index and on map (1 = yes, 0 = no)
   define('IMAGEFILE_SIZE_SHOW', '0');
-  // Image File Size: Abort upload of all images larger than this size. In Megabytes. 0=disabled
+  // Image File Size: Abort upload of all images larger than this size. 
+  // In Megabytes. Usually, '.' is decimal separator. 0=disabled. Example: '1.25'
   define('IMAGEFILE_SIZE_LIMIT_MB', '0');
   
   // Override the standard greeting to enable external memberlogin and cross-site request.
@@ -157,7 +158,7 @@
   // To avoid exporting certain maps, users can tag it with using certain words in the dicipline field.
   // Value is case-insensitive and supports multiple values separated with ';' ex: 'nowoo;internal'
   define('RSS_SKIP_MAPS_WITH_DICIPLINE_CONTAINING', '');
-  // Override previous setting if request contains a parameter SECRET matching a set value.
+  // Override previous setting if request contains a parameter SECRET matching a set value.  
   define('RSS_ALLOW_GET_WITH_SECRET', '');
   
     // Administrator can set user invisible. This setting allows user to still use account privately. 0=disabled, 1=enabled
