@@ -5,7 +5,10 @@
   // The settning names must not be changed, but the setting values are up to you to edit. All text setting values
   // must be enclosed in single quotes ('). If a setting value contais a single quote, use the \' character combination.
   // Numeric settings and boolean settings (true or false) should not be enclosed in single quotes.
+//  error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 
+//echo phpinfo();
   // *********************************************************************************************************
   //   SYSTEM SETTINGS
   // *********************************************************************************************************
@@ -15,6 +18,7 @@
   define('DB_HOST', getenv('DB_HOST'));
   define('DB_USERNAME', getenv('DB_USERNAME'));
   define('DB_PASSWORD', getenv('DB_PASSWORD'));
+
   // The name of the database where the map information is stored. The database must exist prior to creation of the site.
   define('DB_DATABASE_NAME', getenv('DB_DATABASE_NAME'));
   // The names of the database tables where user and map information is stored. Do not change unless you have a reason.
@@ -68,7 +72,7 @@
   define('ADMIN_EMAIL', getenv('ADMIN_EMAIL'));
 
   // Specifies the code that a person has to enter when creating a new user accounts by himself without any administrator involved.
-  // Leave the code empty ('') to prevent people to create user accounts theirselves.
+  // Leave the code empty ('') to prevent people to create user accounts theirselves. 
   define('PUBLIC_USER_CREATION_CODE', getenv('PUBLIC_USER_CREATION_CODE'));
 
   // *********************************************************************************************************
@@ -155,11 +159,15 @@
   // Set SMTP Ecryption valid values={'tls', ssl, ''} (empty = not set)
   define('SMTP_ENCRYPTION', getenv('SMTP_ENCRYPTION'));  
   
-    // To avoid exporting certain maps, users can tag it with using certain words in the dicipline field.
+  // To avoid exporting certain maps, users can tag it with using certain words in the dicipline field.
   // Value is case-insensitive and supports multiple values separated with ';' ex: 'nowoo;internal'
   define('RSS_SKIP_MAPS_WITH_DICIPLINE_CONTAINING', getenv('RSS_SKIP_MAPS_WITH_DICIPLINE_CONTAINING'));
-    // Override previous setting if request contains a parameter SECRET matching a set value.
+  
+  // Override previous setting if request contains a parameter SECRET matching a set value.
   define('RSS_ALLOW_GET_WITH_SECRET', getenv('RSS_ALLOW_GET_WITH_SECRET'));
+  
+  // Black list of IP addresses for RSS
+  define('RSS_BLOCK_IP_ADDRESSES', getenv('RSS_BLOCK_IP_ADDRESSES'));
   
   // Administrator can set user invisible. This setting allows user to still use account privately. 0=disabled, 1=enabled
   define('USER_ALLOW_HIDDEN_USAGE', getenv('USER_ALLOW_HIDDEN_USAGE'));

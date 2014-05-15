@@ -3,6 +3,10 @@
 
   class DataAccess
   {
+      private static function AllowHiddenUser()
+      {
+          
+      }
     public static function GetAllMaps($userID = 0, $requestingUserID = 0)
     {
       $userID = mysql_real_escape_string($userID);
@@ -54,7 +58,7 @@
         default: $ob = "M.Date DESC"; break;
       }
 
-      if(!(USER_ALLOW_HIDDEN_USAGE && $userID == $requestingUserID && $requestingUserID != 0))
+      if(!(USER_ALLOW_HIDDEN_USAGE == 1 && $userID == $requestingUserID && $requestingUserID != 0))
       {
         $where[] = "U.Visible=1";
       }

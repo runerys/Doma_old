@@ -45,6 +45,9 @@
       
       $viewData["Items"] = array();
 
+      if(!$this->AllowRssGet())
+        return $viewData;
+
       foreach($maps as $map)
       {             
         if($this->ShouldSkip($map))
@@ -82,15 +85,48 @@
       return $viewData;
     }
     
-    private function ShouldSkip($map)
+    private function AllowRssGet()
     {
-      // Allow all fetching if secret value is presented
-      if(strlen(RSS_ALLOW_GET_WITH_SECRET) > 0)
-      {
-        if(isset($_GET["SECRET"]) && $_GET["SECRET"] == RSS_ALLOW_GET_WITH_SECRET)
-          return false;
-      }
-    
+        // Deny client IP if on the blacklist
+        if(strlen(RSS_BLOCK_IP_ADDRESSES) > 0)
+        {
+            $blockIps = explode(';', RSS_BLOCK_IP_ADDRESSES);
+            $clientIp = $this->getClientIP();
+            
+            foreach($blockIps as $blockIp)
+            {
+                if(strcmp($clientIp, $blockIp) == 0)    
+                    return false;
+            }
+        }
+            
+        // No secret configured: Allow
+        if(strlen(RSS_ALLOW_GET_WITH_SECRET) == 0)
+            return true;
+      
+        // No secret presented in Url: Deny
+        if(!isset($_GET["secret"]))
+            return false;
+        
+        $fromUrl = $_GET["secret"];
+        $secrets = explode(';', RSS_ALLOW_GET_WITH_SECRET);
+        
+        foreach($secrets as $secret)
+        {
+            // Compare Case-Insensitive. 0=equal
+            if (strcasecmp($secret, $fromUrl) == 0)
+            {        
+                // Url matches a configured secret: Allow
+                return true;
+            }
+        }
+       
+        // No match: Deny
+        return false;               
+    }
+
+    private function ShouldSkip($map)
+    {         
       // Allow all fetching unless dicipline filter is set
       if(strlen(RSS_SKIP_MAPS_WITH_DICIPLINE_CONTAINING) == 0)
         return false;            
@@ -108,6 +144,28 @@
       }
       
       return false;
-    }    
+    }  
+    
+    function getClientIP() 
+    {
+        if (isset($_SERVER))
+        {
+            if (isset($_SERVER["HTTP_X_FORWARDED_FOR"]))
+                return $_SERVER["HTTP_X_FORWARDED_FOR"];
+
+            if (isset($_SERVER["HTTP_CLIENT_IP"]))
+                return $_SERVER["HTTP_CLIENT_IP"];
+
+            return $_SERVER["REMOTE_ADDR"];
+        }
+
+        if (getenv('HTTP_X_FORWARDED_FOR'))
+            return getenv('HTTP_X_FORWARDED_FOR');
+
+        if (getenv('HTTP_CLIENT_IP'))
+            return getenv('HTTP_CLIENT_IP');
+
+        return getenv('REMOTE_ADDR');
+    }  
   }
 ?>
